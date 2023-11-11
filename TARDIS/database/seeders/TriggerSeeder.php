@@ -3,7 +3,8 @@
 namespace Database\Seeders;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
-use App\Models\Trigger;
+use Illuminate\Support\Str;
+
 
 class TriggerSeeder extends Seeder
 {
@@ -14,6 +15,10 @@ class TriggerSeeder extends Seeder
      */
     public function run()
     {
-        Trigger::factory()->count(3)->create();
+        DB::table('triggers')->insert([
+            'severity' => Str::random(10),
+            'level'=>random_int(1,10),
+            'descripton' => Str::random(10),
+        ]);
     }
 }

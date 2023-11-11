@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contract;
+use App\Models\Associate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -16,8 +17,10 @@ class ContractController extends Controller
      */
     public function index()
     {
-        $all = Contract::all();
-        return response()->json($all);
+        $all = Contract::with('addtive')->get();
+        $teste = 2004;
+       // return response()->json($all);
+       return response()->json(["msg"=>"teste",$all]);
     }
 
     /**
@@ -103,5 +106,10 @@ class ContractController extends Controller
     public function destroy(Contract $contract)
     {
         //
+    }
+    public function teste()
+    {
+        $data = Associate::getTriggers();
+        dd($data);
     }
 }

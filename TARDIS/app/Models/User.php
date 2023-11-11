@@ -67,4 +67,12 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+    public function getTriggers()
+    {
+        //return $this->belongsTo(Contract::class);
+        //return $this->hasOne(Contract::class);
+        //return $this->belongsTo(Contract::class, 'id_contract');
+        return $this->hasMany(Triggers::class, 'user_id', 'id');
+        //return $this->morphTo();
+    }
 }

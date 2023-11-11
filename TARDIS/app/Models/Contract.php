@@ -19,12 +19,12 @@ class Contract extends Model
         'sector',
         'id_contract',
     ];
+    public function triggers()
+    {
+        return $this->hasMany(Trigger::class, 'id_contract');
+    }
     public function addtive()
     {
-        //return $this->belongsTo(Contract::class);
-        //return $this->hasOne(Contract::class);
-        //return $this->belongsTo(Contract::class, 'id_contract');
-        return $this->hasMany(Additives::class, 'id_contract');
-        //return $this->morphTo();
+        return $this->hasMany(Additive::class, 'id_contract');
     }
 }

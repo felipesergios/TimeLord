@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ContractController;
+use App\Http\Controllers\AdditiveController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,8 @@ use App\Http\Controllers\ContractController;
         return response()->json(['api_name'=>'APP-V0.0.1','api_auth_type'=>'JWT']);
     }); */
 
+    Route::get('teste', [ContractController::class,'teste']);
+
     Route::post('login', [AuthController::class,'login']);
    
     Route::post('logout', [AuthController::class,'logout']);
@@ -45,6 +48,7 @@ use App\Http\Controllers\ContractController;
         Route::resource('contract', ContractController::class)->only([
             'index', 'store'
         ]);
+        Route::post('additives/register', [AdditiveController::class,'store']);
 
     });
     

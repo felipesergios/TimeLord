@@ -9,8 +9,10 @@ class Trigger extends Model
 {
     //use HasFactory;
     protected $fillable = [
+        'id',
         'severity',
         'level',
         'description',
     ];
+    return $this->hasMany(Associate::class, 'id');
 }

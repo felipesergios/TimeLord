@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateContractsTable extends Migration
+class CreateAdditivesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,12 @@ class CreateContractsTable extends Migration
      */
     public function up()
     {
-        Schema::create('contracts', function (Blueprint $table) {
+        Schema::create('additives', function (Blueprint $table) {
             $table->id();
-            $table->string('company_name');
+            $table->foreignId('id_contract')->references('id')->on('contracts');
             $table->string('process_number');
-            $table->string('supervisor');
             $table->date('validity');
-            $table->string('serial_contract');
-            $table->string('object')->default('null');
             $table->string('notes')->default('null');
-            $table->string('sector')->default('mysector');
             $table->timestamps();
         });
     }
@@ -34,6 +30,6 @@ class CreateContractsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contracts');
+        Schema::dropIfExists('additives');
     }
 }
