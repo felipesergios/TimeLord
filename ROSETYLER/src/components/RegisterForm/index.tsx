@@ -14,10 +14,10 @@ import {
 import { useState } from 'react';
 import api from '../../services/api';
 import dayjs from "dayjs";
-import { redirect } from 'react-router';
-import { url } from 'inspector';
+import { useNavigate } from 'react-router-dom';
 
   export default function RegisterForm() {
+    const navigate = useNavigate();
     const toast = useToast()
     const [name,setName]=useState('')
     const [process,setProcess]=useState('')
@@ -61,7 +61,7 @@ const handleClick = async () => {
         setSupervisor('')
         setValidade('')
         setSerial('')
-        redirect('Home');
+        navigate('/Home')
 
     }catch(err){
         //alert('Nao foi possivel efetuar o login')

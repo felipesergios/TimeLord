@@ -91,6 +91,7 @@ export default function Success() {
         <Th >Vigencia</Th>
         <Th >Status</Th>
         <Th >Dias ate o Termino</Th>
+        <Th >Termos</Th>
       </Tr>
     </Thead>
     <Tbody>
@@ -119,6 +120,7 @@ export default function Success() {
           <Td>{date1.toLocaleString()}</Td>
           <Td> {Status ? <Progress hasStripe max={90} isAnimated={true} value={Difference_In_Days} />:<Progress  colorScheme={'red'} hasStripe max={90} isAnimated={true} value={Difference_In_Days} />} </Td>
           <Td>{Difference_In_Days}</Td>
+          <Td>{contrato.addtive.length}</Td>
          </Tr>
             </>
           )

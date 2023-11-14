@@ -9,8 +9,8 @@ import Success from "./components/ListContracts";
 import LoginForm from "./components/LoginForm";
 import MainPage from "./components/Main";
 import UserProfileEdit from "./components/Profile";
-import Multistep from './components/AdditiveForm';
 import { isAuthenticated } from "./services/auth";
+import AditivesForm from "./components/AdditiveForm";
 
 
 
@@ -39,7 +39,7 @@ export default function RoutesApp() {
             <UserProfileEdit/>
           </ProtectedRoute>} />
           <Route path="/Aditivos" element={<ProtectedRoute>
-            <Multistep/>
+            <AditivesForm/>
           </ProtectedRoute>} />
           <Route path="*" element={<NoMatch />} />
         </Route>
