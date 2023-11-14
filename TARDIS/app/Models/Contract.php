@@ -10,6 +10,7 @@ class Contract extends Model
     //use HasFactory;
      //use HasFactory;
      protected $fillable = [
+        'id_user',
         'company_name',
         'process_number',
         'supervisor',
@@ -27,4 +28,9 @@ class Contract extends Model
     {
         return $this->hasMany(Additive::class, 'id_contract');
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user', 'id');
+    }
+
 }

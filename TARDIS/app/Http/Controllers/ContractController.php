@@ -7,7 +7,7 @@ use App\Models\Associate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-
+use Illuminate\Support\Facades\Auth;
 class ContractController extends Controller
 {
     /**
@@ -17,10 +17,14 @@ class ContractController extends Controller
      */
     public function index()
     {
-        $all = Contract::with('addtive')->get();
-        $teste = 2004;
+       // $all = Contract::with('addtive')->get();
+       // $teste = 2004;
        // return response()->json($all);
-       return response()->json(["msg"=>"teste",$all]);
+       //return response()->json(["msg"=>"teste",$all]);
+       $user=Auth::user();
+       $all_services_per_user = Contract::with('addtive')->with('user')->where('id_user', '=', $user->id)->get();
+       return response()->json($all_services_per_user);
+
     }
 
     /**
@@ -56,7 +60,9 @@ class ContractController extends Controller
         if($validator->fails()){
             return($validator->messages());
         }else{
+            $user=Auth::user();
             $data = $request->all();
+            $data['id_user'] = $user->id;
             $newCT = Contract::create($data);
             return response()->json(['newCT'=>$newCT]);
         }
