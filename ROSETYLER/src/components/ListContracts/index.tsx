@@ -56,14 +56,14 @@ export default function Success() {
     <Box textAlign="left" mb={5} py={10} px={6}>
       <MdBook size={50} color={'green.500'} />
       <Heading as="h2" size="xl" mt={6} mb={2}>
-        Veja seus contratos
+        Seus contratos
       </Heading>
       <Text color={'gray.500'}>
-       Aqui estao seus trabalhos ativos
+      Listagem com dados que estão abaixo de 60 dias
       </Text>
-      <AddIcon />
-        <Button onClick={handleClick}>
-          Criar novo trabalho
+      
+        <Button leftIcon={<AddIcon />} colorScheme='blue' onClick={handleClick}>
+          Cadastrar novo contrato
         </Button>
 
 
@@ -90,6 +90,7 @@ export default function Success() {
         <Th>Serial</Th>
         <Th >Vigencia</Th>
         <Th >Status</Th>
+        <Th >Dias ate o Termino</Th>
       </Tr>
     </Thead>
     <Tbody>
@@ -117,11 +118,12 @@ export default function Success() {
           <Td>{contrato.serial_contract}</Td>
           <Td>{date1.toLocaleString()}</Td>
           <Td> {Status ? <Progress hasStripe max={90} isAnimated={true} value={Difference_In_Days} />:<Progress  colorScheme={'red'} hasStripe max={90} isAnimated={true} value={Difference_In_Days} />} </Td>
+          <Td>{Difference_In_Days}</Td>
          </Tr>
             </>
           )
         }
-        console.log(Difference_In_Days)
+       // console.log(Difference_In_Days)
         
         
       })}

@@ -14,6 +14,8 @@ import {
 import { useState } from 'react';
 import api from '../../services/api';
 import dayjs from "dayjs";
+import { redirect } from 'react-router';
+import { url } from 'inspector';
 
   export default function RegisterForm() {
     const toast = useToast()
@@ -43,8 +45,6 @@ const handleClick = async () => {
           serial_contract:serial,
           object:object,
           notes:notes
-          
-    
         });
        
         toast({
@@ -61,6 +61,7 @@ const handleClick = async () => {
         setSupervisor('')
         setValidade('')
         setSerial('')
+        redirect('Home');
 
     }catch(err){
         //alert('Nao foi possivel efetuar o login')
@@ -88,7 +89,7 @@ const handleClick = async () => {
       <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
         <Flex p={8} flex={1} align={'center'} justify={'center'}>
           <Stack spacing={1} w={'full'} maxW={'md'}>
-            <Heading fontSize={'2xl'}>Preecha os dados do servico</Heading>
+            <Heading fontSize={'2xl'}>Dados do contrato</Heading>
 
             <FormControl id="company_name">
               <FormLabel>Nome da empresa</FormLabel>
