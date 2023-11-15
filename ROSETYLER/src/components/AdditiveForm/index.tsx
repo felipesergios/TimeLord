@@ -55,7 +55,8 @@ export default function AditivesForm() {
       minH={'100vh'}
       align={'center'}
       justify={'center'}
-      bg={useColorModeValue('gray.50', 'gray.800')}>
+      borderRadius={8}
+      bg={useColorModeValue('gray.400', 'gray.800')}>
       <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
         <Stack align={'center'}>
           <Heading fontSize={'4xl'}>Cadastro de aditivos</Heading>
@@ -96,6 +97,7 @@ export default function AditivesForm() {
           </Stack>
         </Box>
       </Stack>
+      
     </Flex>
   )
 }

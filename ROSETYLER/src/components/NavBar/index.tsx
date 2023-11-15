@@ -35,21 +35,22 @@ import {
 } from 'react-icons/fi';
 import { IconType  } from 'react-icons';
 import { ReactText } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { logout } from '../../services/auth';
 import axios from 'axios';
 import { ColorModeSwitcher } from '../../ColorModeSwitcher';
 
 interface LinkItemProps {
   name: string;
+  describe:string;
   icon: IconType;
 }
 const LinkItems: Array<LinkItemProps> = [
-  { name: 'Home', icon: FiHome },
-  { name: 'Acompanhamento', icon: FiTrendingUp },
-  { name: 'Aditivos', icon: FiCompass },
-  { name: 'Favourites', icon: FiStar },
-  { name: 'Settings', icon: FiSettings },
+  { name: 'Home', icon: FiHome ,describe:"Inicio" },
+  { name: 'Acompanhamento', icon: FiTrendingUp , describe:"Acompanhar"},
+  { name: 'Aditivos', icon: FiCompass,describe:"Incluir Aditivos" },
+  { name: 'Processos', icon: FiStar , describe:"Incluir processos" },
+  { name: 'Settings', icon: FiSettings , describe:"Configurações"},
 ];
 
 export default function NarBar({
@@ -110,8 +111,8 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon}>
-          {link.name}
+        <NavItem key={link.name} icon={link.icon} page={link.name}>
+          {link.describe}
         </NavItem>
       ))}
     </Box>
@@ -121,10 +122,13 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
 interface NavItemProps extends FlexProps {
   icon: IconType;
   children: ReactText;
+  page:string
 }
-const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
+const NavItem = ({ icon, children,page, ...rest }: NavItemProps) => {
   return (
-    <Link href={String(children)} style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
+    <NavLink 
+    key={children} 
+    to={page}>
       <Flex
         align="center"
         p="4"
@@ -149,7 +153,8 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
         )}
         {children}
       </Flex>
-    </Link>
+      </NavLink>
+    
   );
 };
 

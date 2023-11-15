@@ -1,6 +1,6 @@
 import {
     Button,
-    Checkbox,
+    Box,
     Flex,
     FormControl,
     FormLabel,
@@ -8,7 +8,7 @@ import {
     Input,
     Link,
     Stack,
-    Image,
+    useColorModeValue,
     useToast,
   } from '@chakra-ui/react';
 import { useState } from 'react';
@@ -34,7 +34,6 @@ import { useNavigate } from 'react-router-dom';
 const handleClick = async () => {
 
     //const newValidate = dayjs(validade).format("YYYY-MM-DD");
-    console.log(validade)
 
     try{
         const response:any = await api.post("/contract", 
@@ -46,28 +45,43 @@ const handleClick = async () => {
           object:object,
           notes:notes
         });
+        if(response.data.newCT){
+          console.log('Deu certo')
+          toast({
+            title: 'Contrato Incluido',
+            description: "Todos os dados foram salvos",
+            status: 'success',
+            duration: 8000,
+            isClosable: true,
+          })
+  
+          setName('')
+          setObject('')
+          setProcess('')
+          setSupervisor('')
+          setValidade('')
+          setSerial('')
+        }
+        if(!response.data.newCT){
+          console.log(response.data)
+          toast({
+            title: 'Operacao Falhou',
+            description: "Falha na validação dos dados",
+            status: 'warning',
+            duration: 9000,
+            isClosable: true,
+          })
+        }
        
-        toast({
-          title: 'Contrato Incluido',
-          description: "Todos os dados foram salvos",
-          status: 'success',
-          duration: 8000,
-          isClosable: true,
-        })
-
-        setName('')
-        setObject('')
-        setProcess('')
-        setSupervisor('')
-        setValidade('')
-        setSerial('')
-        navigate('/Home')
+       
+        
+       // navigate('/Home')
 
     }catch(err){
         //alert('Nao foi possivel efetuar o login')
         toast({
           title: 'Operacao Falhou',
-          description: "Verifique os dados e tente novamente ",
+          description: "Falha ao comunicar com o servidor",
           status: 'error',
           duration: 9000,
           isClosable: true,
@@ -86,67 +100,64 @@ const handleClick = async () => {
 
 
     return (
-      <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
-        <Flex p={8} flex={1} align={'center'} justify={'center'}>
-          <Stack spacing={1} w={'full'} maxW={'md'}>
-            <Heading fontSize={'2xl'}>Dados do contrato</Heading>
-
-            <FormControl id="company_name">
-              <FormLabel>Nome da empresa</FormLabel>
+      <Flex
+      minH={'100vh'}
+      align={'center'}
+      justify={'center'}
+      borderRadius={8}
+      bg={useColorModeValue('gray.400', 'gray.800')}>
+      <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
+        <Stack align={'center'}>
+          <Heading fontSize={'4xl'}>Cadastro De Processo</Heading>
+        </Stack>
+        <Box
+          rounded={'lg'}
+          bg={useColorModeValue('white', 'gray.700')}
+          boxShadow={'lg'}
+          p={8}>
+          <Stack spacing={4}>
+          <FormControl id="name">
+              <FormLabel>Empresa</FormLabel>
               <Input type="text" onChange={e => setName(e.target.value)} />
             </FormControl>
 
             <FormControl id="process_number">
-              <FormLabel>Numero do processo</FormLabel>
-              <Input type="number" onChange={e => setProcess(e.target.value)} />
+              <FormLabel>Número do processo</FormLabel>
+              <Input type="text" onChange={e => setProcess(e.target.value)} />
             </FormControl>
 
-
-            <FormControl id="supervisor">
-              <FormLabel>Supervisor</FormLabel>
-              <Input type="text" onChange={e => setSupervisor(e.target.value)} />
-            </FormControl>
-
-
-            <FormControl id="validity">
-              <FormLabel>Vigencia</FormLabel>
-              <Input type='date' onChange={e => setValidade(e.target.value)} />
-            </FormControl>
-
-
-            <FormControl id="serial_contract">
+            <FormControl id="serial">
               <FormLabel>Serial</FormLabel>
               <Input type="text" onChange={e => setSerial(e.target.value)} />
             </FormControl>
 
+            <FormControl id="supervior">
+              <FormLabel>Fiscal | responsável</FormLabel>
+              <Input type="text" onChange={e => setSupervisor(e.target.value)} />
+            </FormControl>
+
+            <FormControl id="validity">
+              <FormLabel>Validade do contrato</FormLabel>
+              <Input type='date' onChange={e => setValidade(e.target.value)} />
+            </FormControl>
+
             <FormControl id="object">
-              <FormLabel>object</FormLabel>
+              <FormLabel>Objeto</FormLabel>
               <Input type="text" onChange={e => setObject(e.target.value)} />
             </FormControl>
 
             <FormControl id="notes">
-              <FormLabel>Notes</FormLabel>
+              <FormLabel>Observações</FormLabel>
               <Input type="text" onChange={e => setNotes(e.target.value)} />
             </FormControl>
 
-
-            <Stack spacing={6}>
-              <Button colorScheme={'blue'} variant={'solid'} onClick={handleClick}>
-                Cadastrar
-              </Button>
-            </Stack>
+            <Button onClick={handleClick} colorScheme='facebook'>Enviar dados</Button>
+            
           </Stack>
-        </Flex>
-        <Flex flex={1}>
-          <Image
-            alt={'Login Image'}
-            objectFit={'cover'}
-            src={
-              'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1352&q=80'
-            }
-          />
-        </Flex>
+        </Box>
       </Stack>
+      
+    </Flex>
     );
   }
 

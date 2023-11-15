@@ -11,6 +11,7 @@ import MainPage from "./components/Main";
 import UserProfileEdit from "./components/Profile";
 import { isAuthenticated } from "./services/auth";
 import AditivesForm from "./components/AdditiveForm";
+import RegisterForm from "./components/RegisterForm";
 
 
 
@@ -40,6 +41,9 @@ export default function RoutesApp() {
           </ProtectedRoute>} />
           <Route path="/Aditivos" element={<ProtectedRoute>
             <AditivesForm/>
+          </ProtectedRoute>} />
+          <Route path="/Processos" element={<ProtectedRoute>
+            <RegisterForm/>
           </ProtectedRoute>} />
           <Route path="*" element={<NoMatch />} />
         </Route>
