@@ -47,7 +47,7 @@ interface LinkItemProps {
 }
 const LinkItems: Array<LinkItemProps> = [
   { name: 'Home', icon: FiHome ,describe:"Inicio" },
-  { name: 'Acompanhamento', icon: FiTrendingUp , describe:"Acompanhar"},
+  { name: 'acompanhamento', icon: FiTrendingUp , describe:"Acompanhar"},
   { name: 'Aditivos', icon: FiCompass,describe:"Incluir Aditivos" },
   { name: 'Processos', icon: FiStar , describe:"Incluir processos" },
   { name: 'Settings', icon: FiSettings , describe:"Configurações"},

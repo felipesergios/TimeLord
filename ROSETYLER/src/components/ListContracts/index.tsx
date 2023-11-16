@@ -8,48 +8,39 @@ import { Box, Button, Heading, Text ,Table,
   TableCaption,
   TableContainer,
   Progress,
-  Drawer,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  DrawerHeader,
-  DrawerBody,
-  useDisclosure, } from '@chakra-ui/react';
-import { CheckCircleIcon ,AddIcon } from '@chakra-ui/icons';
+  } from '@chakra-ui/react';
+
+
 
 import {MdBook} from 'react-icons/md'
 import { useNavigate } from 'react-router-dom';
 
-import {logout} from '../../services/auth'
 import api from '../../services/api';
-import RegisterForm from '../RegisterForm';
+import DataComponent from '../DataTableComponent'
 
-interface ContratoInterface{
-  processo:string,
-  supervisor:string,
-}
+
+
+
+
 
 export default function Success() {
+  
+
   const [contratos,setContratos]=useState<any[]>([])
+  const [campos,setCampos]=useState<any[]>([])
   const navigate = useNavigate();
 
-  const handleClick = () => {
-   // logout()
-   // navigate("/login");
-   onOpen()
-}
   async function loadContratos(){
     const res = await api.get("/contract")
     setContratos(res.data)
     console.log(res.data)
+    setCampos(Object.keys(res.data))
   }
 
   useEffect(()=>{
     loadContratos()
   },[])
 
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  var size = 'xl'
 
   return (
     
@@ -61,47 +52,31 @@ export default function Success() {
       <Text color={'gray.500'}>
       Listagem com dados que estão abaixo de 60 dias
       </Text>
+      <Table size={'md'} variant='striped'>
+        
       
-        <Button leftIcon={<AddIcon />} colorScheme='blue' onClick={handleClick}>
-          Cadastrar novo contrato
-        </Button>
+        </Table>
 
 
-        <Drawer onClose={onClose} isOpen={isOpen} size={size}>
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader>Cadastro de novo contrato</DrawerHeader>
-          <DrawerBody>
-           <RegisterForm/>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
-
-
-        <TableContainer>
-  <Table variant='striped'>
+<TableContainer w={'-webkit-max-content'} h={'-webkit-fit-content'}>
+  <Table size={'md'} variant='striped'>
     <TableCaption>Preste atencao aos contratos com status em alerta</TableCaption>
     <Thead>
       <Tr>
-        <Th>Empresa</Th>
-        <Th>Processo</Th>
-        <Th>Supervisor</Th>
-        <Th>Serial</Th>
-        <Th >Vigencia</Th>
+        <Th>Objeto</Th>
         <Th >Status</Th>
         <Th >Dias ate o Termino</Th>
         <Th >Termos</Th>
       </Tr>
     </Thead>
-    <Tbody>
+    <Tbody >
       {contratos.map(contrato => {
 
         var date1 = new Date(contrato.validity);
         var date2 = new Date();
         var Difference_In_Time = date1.getTime() - date2.getTime();
         var Difference_In_Days = parseInt(`${Difference_In_Time / (1000 * 3600 * 24)}`);
-
+       
         
         
         var Status = false
@@ -113,12 +88,9 @@ export default function Success() {
           return (
             <>
             <Tr>
-          <Td>{contrato.company_name}</Td>
-          <Td>{contrato.process_number}</Td>
-          <Td>{contrato.supervisor}</Td>
-          <Td>{contrato.serial_contract}</Td>
-          <Td>{date1.toLocaleString()}</Td>
+          <Td>{contrato.object}</Td>
           <Td> {Status ? <Progress hasStripe max={90} isAnimated={true} value={Difference_In_Days} />:<Progress  colorScheme={'red'} hasStripe max={90} isAnimated={true} value={Difference_In_Days} />} </Td>
+         
           <Td>{Difference_In_Days}</Td>
           <Td>{contrato.addtive.length}</Td>
          </Tr>
@@ -135,6 +107,7 @@ export default function Success() {
    
   </Table>
 </TableContainer>
+
     </Box>
   );
 }

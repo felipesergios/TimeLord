@@ -12,15 +12,14 @@ import UserProfileEdit from "./components/Profile";
 import { isAuthenticated } from "./services/auth";
 import AditivesForm from "./components/AdditiveForm";
 import RegisterForm from "./components/RegisterForm";
-
-
+import ErroComponent from './components/ErrorComponent';
+import FollowComponent from './components/FollowComponent';
 
 const ProtectedRoute = ({ children }:any) => {
     const authenticated = isAuthenticated()
     if (!authenticated) {
       return <Navigate to="/landing" replace />;
     }
-  
     return children;
   };
 
@@ -45,7 +44,10 @@ export default function RoutesApp() {
           <Route path="/Processos" element={<ProtectedRoute>
             <RegisterForm/>
           </ProtectedRoute>} />
-          <Route path="*" element={<NoMatch />} />
+          <Route path="/acompanhamento" element={<ProtectedRoute>
+            <FollowComponent/>
+          </ProtectedRoute>} />
+          <Route path="*" element={<ErroComponent />} />
         </Route>
       </Routes>
     </Router>
