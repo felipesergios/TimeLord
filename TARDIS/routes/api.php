@@ -45,9 +45,10 @@ use App\Http\Controllers\AdditiveController;
 
         Route::post('me', [AuthController::class,'me']);
        
-        Route::resource('contract', ContractController::class)->only([
-            'index', 'store'
-        ]);
+       // Route::resource('contract', ContractController::class)->only([
+       //     'index', 'store' , 'show'
+       // ]);
+        Route::resource('contract',ContractController::class);
         Route::post('additives/register', [AdditiveController::class,'store']);
 
     });

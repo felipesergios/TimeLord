@@ -20,10 +20,6 @@ class Contract extends Model
         'sector',
         'id_contract',
     ];
-    public function triggers()
-    {
-        return $this->hasMany(Trigger::class, 'id_contract');
-    }
     public function addtive()
     {
         return $this->hasMany(Additive::class, 'id_contract');

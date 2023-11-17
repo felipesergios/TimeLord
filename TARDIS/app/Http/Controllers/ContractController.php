@@ -17,10 +17,6 @@ class ContractController extends Controller
      */
     public function index()
     {
-       // $all = Contract::with('addtive')->get();
-       // $teste = 2004;
-       // return response()->json($all);
-       //return response()->json(["msg"=>"teste",$all]);
        $user=Auth::user();
        $all_services_per_user = Contract::with('addtive')->with('user')->where('id_user', '=', $user->id)->get();
        return response()->json($all_services_per_user);
@@ -46,7 +42,7 @@ class ContractController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'company_name' => 'required|max:255',
+            'company_name' => 'required',
             'process_number' => 'required',
             'supervisor' => 'required',
             'validity'=>'required',
@@ -75,9 +71,15 @@ class ContractController extends Controller
      * @param  \App\Models\Contract  $contract
      * @return \Illuminate\Http\Response
      */
-    public function show(Contract $contract)
+    public function show($contract)
     {
-        //
+        try {
+            $register = Contract::with('addtive')->FindorFail($contract);
+            return response()->json(['contrato'=>$register]);
+        } catch (\Throwable $th) {
+            return response()->json(['msg'=>$th]);
+        }
+       
     }
 
     /**
@@ -109,13 +111,14 @@ class ContractController extends Controller
      * @param  \App\Models\Contract  $contract
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Contract $contract)
+    public function destroy($contract)
     {
-        //
-    }
-    public function teste()
-    {
-        $data = Associate::getTriggers();
-        dd($data);
+        try {
+            Contract::FindorFail($contract)->delete();
+            return response()->json(['msg'=>'Registro destruido']);
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json(['msg'=>$th]);
+        }
     }
 }
