@@ -14,6 +14,7 @@ import AditivesForm from "./components/AdditiveForm";
 import RegisterForm from "./components/RegisterForm";
 import ErroComponent from './components/ErrorComponent';
 import FollowComponent from './components/FollowComponent';
+import DetailsComponent from "./components/DetailsComponent";
 
 const ProtectedRoute = ({ children }:any) => {
     const authenticated = isAuthenticated()
@@ -47,6 +48,11 @@ export default function RoutesApp() {
           <Route path="/acompanhamento" element={<ProtectedRoute>
             <FollowComponent/>
           </ProtectedRoute>} />
+
+          <Route path="/acompanhamento/:id" element={<ProtectedRoute>
+            <DetailsComponent/>
+          </ProtectedRoute>} />
+
           <Route path="*" element={<ErroComponent />} />
         </Route>
       </Routes>

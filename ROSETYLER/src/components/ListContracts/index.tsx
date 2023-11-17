@@ -59,7 +59,7 @@ export default function Success() {
 
 
 <TableContainer w={'-webkit-max-content'} h={'-webkit-fit-content'}>
-  <Table size={'md'} variant='striped'>
+  <Table borderRadius={'full'} size={'md'} variant='striped'>
     <TableCaption>Preste atencao aos contratos com status em alerta</TableCaption>
     <Thead>
       <Tr>
