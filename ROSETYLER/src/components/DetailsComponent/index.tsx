@@ -20,15 +20,18 @@ import {
   import { MdLocalShipping } from 'react-icons/md'
 import { useParams } from 'react-router-dom';
 import api from '../../services/api';
+import dateValidator from '../../services/dateValidator'
+import AddtiveDetails from '../AdditiveDetails';
 
 interface RowData {
     company_name: string;
     process_number: string;
     supervisor: string;
-    validity : Date
+    validity : Date;
     serial_contract: string;
     object: string;
     notes: string;
+    addtive:[];
     // adicione outras propriedades conforme necessário
   }
 
@@ -48,6 +51,8 @@ export default function DetailsComponent(){
   
     let { id } = useParams();
 
+    
+
     return (
 
 
@@ -57,7 +62,7 @@ export default function DetailsComponent(){
 
          <Container maxW={'7xl'}>
       <SimpleGrid
-        columns={{ base: 1, lg: 2 }}
+        columns={{ base: 2, lg: 3 }}
         spacing={{ base: 8, md: 10 }}
         py={{ base: 18, md: 24 }}>
         <Stack spacing={{ base: 6, md: 10 }}>
@@ -84,8 +89,8 @@ export default function DetailsComponent(){
             }>
             <Box>
               <Text
-                fontSize={{ base: '16px', lg: '18px' }}
-                color={useColorModeValue('yellow.500', 'yellow.300')}
+                fontSize={{ base: '18px', lg: '24px' }}
+                color={useColorModeValue('blue.500', 'blue.300')}
                 fontWeight={'500'}
                 textTransform={'uppercase'}
                 mb={'4'}>
@@ -100,8 +105,8 @@ export default function DetailsComponent(){
             </Box>
             <Box>
               <Text
-                fontSize={{ base: '16px', lg: '18px' }}
-                color={useColorModeValue('yellow.500', 'yellow.300')}
+                fontSize={{ base: '18px', lg: '24px' }}
+                color={useColorModeValue('blue.500', 'blue.300')}
                 fontWeight={'500'}
                 textTransform={'uppercase'}
                 mb={'4'}>
@@ -123,45 +128,52 @@ export default function DetailsComponent(){
                 </ListItem>
                 <ListItem>
                   <Text as={'span'} fontWeight={'bold'}>
-                    Case:
+                    Objeto da contratação
                   </Text>{' '}
-                  Steel
+                  {contrato?.object}
                 </ListItem>
                 <ListItem>
                   <Text as={'span'} fontWeight={'bold'}>
-                    Case diameter:
+                    Anotações
                   </Text>{' '}
-                  42 mm
+                  {contrato?.notes}
                 </ListItem>
                 <ListItem>
                   <Text as={'span'} fontWeight={'bold'}>
-                    Dial color:
+                    Termos
                   </Text>{' '}
-                  Black
+                  {contrato?.addtive.length}
                 </ListItem>
-                <ListItem>
-                  <Text as={'span'} fontWeight={'bold'}>
-                    Crystal:
-                  </Text>{' '}
-                  Domed, scratch‑resistant sapphire crystal with anti‑reflective treatment
-                  inside
-                </ListItem>
-                <ListItem>
-                  <Text as={'span'} fontWeight={'bold'}>
-                    Water resistance:
-                  </Text>{' '}
-                  5 bar (50 metres / 167 feet){' '}
-                </ListItem>
+
+                
+                
+                
               </List>
             </Box>
+            <Box>
+              
+            </Box>
+            
           </Stack>
+        
 
 
-          <Stack direction="row" alignItems="center" justifyContent={'center'}>
-            <MdLocalShipping />
-            <Text>2-3 business days delivery</Text>
-          </Stack>
+
+
         </Stack>
+        <Box> 
+          {contrato?.addtive.map((data:any,i:number)=>(
+            <AddtiveDetails 
+            id={data.id} 
+            notes={data.notes} 
+            process_number={data.process_number}
+            validity={data.validity}
+            updated_at={data.updated_at}
+            key={i}
+            />
+          ))}
+          
+        </Box>
       </SimpleGrid>
     </Container>
         </>

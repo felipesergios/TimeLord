@@ -13,7 +13,7 @@ import { Box, Button, Heading, Text ,Table,
 
 
 import {MdBook} from 'react-icons/md'
-import { useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 
 import api from '../../services/api';
 import DataComponent from '../DataTableComponent'
@@ -88,7 +88,7 @@ export default function Success() {
           return (
             <>
             <Tr>
-          <Td>{contrato.object}</Td>
+          <Td><Button colorScheme='messenger' variant='outline' ><Link to={`/acompanhamento/${contrato.id}`}>{contrato.object}</Link></Button></Td>
           <Td> {Status ? <Progress hasStripe max={90} isAnimated={true} value={Difference_In_Days} />:<Progress  colorScheme={'red'} hasStripe max={90} isAnimated={true} value={Difference_In_Days} />} </Td>
          
           <Td>{Difference_In_Days}</Td>

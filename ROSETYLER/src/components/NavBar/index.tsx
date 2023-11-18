@@ -82,7 +82,7 @@ export default function NarBar({
       </Drawer>
       {/* mobilenav */}
       <MobileNav onOpen={onOpen} />
-      <Box ml={{ base: 0, md: 60 }} p="4">
+      <Box rounded={'8px'} bg={useColorModeValue('gray.400', 'gray.800')} ml={{ base: 0, md: 60 }} p="4">
         {children}
       </Box>
     </Box>
