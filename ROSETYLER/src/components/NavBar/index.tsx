@@ -24,15 +24,11 @@ import {
   MenuList,
 } from '@chakra-ui/react';
 import {
-  FiHome,
-  FiTrendingUp,
-  FiCompass,
-  FiStar,
-  FiSettings,
   FiMenu,
   FiBell,
   FiChevronDown,
 } from 'react-icons/fi';
+import { FcHome ,FcBarChart ,FcAddDatabase ,FcSurvey ,FcSettings} from "react-icons/fc";
 import { IconType  } from 'react-icons';
 import { ReactText } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -46,11 +42,11 @@ interface LinkItemProps {
   icon: IconType;
 }
 const LinkItems: Array<LinkItemProps> = [
-  { name: 'Home', icon: FiHome ,describe:"Inicio" },
-  { name: 'acompanhamento', icon: FiTrendingUp , describe:"Acompanhar"},
-  { name: 'Aditivos', icon: FiCompass,describe:"Incluir Aditivos" },
-  { name: 'Processos', icon: FiStar , describe:"Incluir processos" },
-  { name: 'Settings', icon: FiSettings , describe:"Configurações"},
+  { name: 'Home', icon: FcHome ,describe:"Inicio" },
+  { name: 'acompanhamento', icon: FcBarChart , describe:"Acompanhar"},
+  { name: 'Aditivos', icon: FcAddDatabase,describe:"Incluir Aditivos" },
+  { name: 'Processos', icon: FcSurvey , describe:"Incluir processos" },
+  { name: 'Settings', icon: FcSettings , describe:"Configurações"},
 ];
 
 export default function NarBar({
@@ -143,8 +139,8 @@ const NavItem = ({ icon, children,page, ...rest }: NavItemProps) => {
         {...rest}>
         {icon && (
           <Icon
-            mr="4"
-            fontSize="16"
+            mr="1"
+            fontSize="35"
             _groupHover={{
               color: 'white',
             }}

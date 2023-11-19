@@ -12,7 +12,7 @@ import { Box, Button, Heading, Text ,Table,
 
 
 
-import {MdBook} from 'react-icons/md'
+import { FcLineChart } from "react-icons/fc"
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 
 import api from '../../services/api';
@@ -45,7 +45,7 @@ export default function Success() {
   return (
     
     <Box textAlign="left" mb={5} py={10} px={6}>
-      <MdBook size={50} color={'green.500'} />
+      <FcLineChart size={50} color={'green.500'} />
       <Heading as="h2" size="xl" mt={6} mb={2}>
         Seus contratos
       </Heading>
@@ -87,7 +87,7 @@ export default function Success() {
         if(Difference_In_Days >= 0){
           return (
             <>
-            <Tr>
+            <Tr rounded={'full'}>
           <Td><Button colorScheme='messenger' variant='outline' ><Link to={`/acompanhamento/${contrato.id}`}>{contrato.object}</Link></Button></Td>
           <Td> {Status ? <Progress hasStripe max={90} isAnimated={true} value={Difference_In_Days} />:<Progress  colorScheme={'red'} hasStripe max={90} isAnimated={true} value={Difference_In_Days} />} </Td>
          

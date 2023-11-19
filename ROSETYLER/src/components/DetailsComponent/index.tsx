@@ -13,7 +13,7 @@ import {
     SimpleGrid,
     StackDivider,
     useColorModeValue,
-    VisuallyHidden,
+    Badge,
     List,
     ListItem,
   } from '@chakra-ui/react'
@@ -27,7 +27,7 @@ interface RowData {
     company_name: string;
     process_number: string;
     supervisor: string;
-    validity : Date;
+    validity : any;
     serial_contract: string;
     object: string;
     notes: string;
@@ -50,6 +50,11 @@ export default function DetailsComponent(){
     },[])
   
     let { id } = useParams();
+
+    var date1 = new Date(contrato?.validity);
+    var date2 = new Date();
+    var Difference_In_Time = date1.getTime() - date2.getTime();
+    var Difference_In_Days = parseInt(`${Difference_In_Time / (1000 * 3600 * 24)}`);
 
     
 
@@ -124,7 +129,14 @@ export default function DetailsComponent(){
                   <Text as={'span'} fontWeight={'bold'}>
                     Vigencia  
                   </Text>{' '}
-                  {String(contrato?.validity)}
+                  {date1.toLocaleDateString()} - <br/> 
+                  {Difference_In_Days <= 60 &&
+                  <Badge colorScheme='red'>Crítico</Badge>
+                  }
+                  {Difference_In_Days <= 90 &&
+                  <Badge colorScheme='yellow'>Atenção</Badge>
+                  }
+                  Faltando {Difference_In_Days} Dias para o vencimento
                 </ListItem>
                 <ListItem>
                   <Text as={'span'} fontWeight={'bold'}>

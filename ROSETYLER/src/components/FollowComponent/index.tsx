@@ -4,7 +4,7 @@ import { Box,Heading, Text ,
 
 
 
-import {MdBook} from 'react-icons/md'
+  import { FcNews } from "react-icons/fc";
 import { useNavigate } from 'react-router-dom';
 
 import api from '../../services/api';
@@ -37,7 +37,7 @@ export default function FollowComponent() {
   return (
     
     <Box textAlign="left" mb={5} py={10} px={6}>
-      <MdBook size={50} color={'green.500'} />
+      <FcNews size={50} color={'green.500'} />
       <Heading as="h2" size="xl" mt={6} mb={2}>
       Acompanhamento
       </Heading>

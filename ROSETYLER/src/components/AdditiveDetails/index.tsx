@@ -8,6 +8,7 @@ import {
     Box,
     Text
   } from '@chakra-ui/react'
+  import { FcFinePrint ,FcOk, FcLeave,FcHighPriority} from "react-icons/fc"
 
   interface AdditiveContract{
     id:Number,
@@ -28,15 +29,24 @@ export default function AddtiveDetails({id,notes,process_number,validity,updated
 <Box bg='whiteAlpha.400' alignItems={'center'} rounded={4}>
 <Accordion allowToggle>
   <AccordionItem>
+ 
     <h2>
+    
       <AccordionButton>
+      {Difference_In_Days >= 90 && <FcOk size={30} /> }
+      {Difference_In_Days <= 90 && <FcHighPriority size={30} /> }
         <Box as="span" flex='1' textAlign='left'>
-          <strong>Aditivo</strong> {process_number}
+        
+         <strong>Aditivo</strong> {process_number} 
         </Box>
         <AccordionIcon />
       </AccordionButton>
     </h2>
     <AccordionPanel pb={4}>
+      {Difference_In_Days >= 60 && <FcFinePrint size={50} /> }
+     
+      {Difference_In_Days < 60 && <FcLeave size={50} />}
+   
       {notes}
       <Box>
         <Text>
