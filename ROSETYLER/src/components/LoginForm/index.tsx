@@ -73,9 +73,9 @@ export default function LoginForm() {
       <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
         <Stack align={'center'}>
         <ColorModeSwitcher justifySelf="flex-end" />
-          <Heading fontSize={'4xl'}>Sistema gestor de prazos  CRONOS</Heading>
+          <Heading fontSize={'4xl'}>Faça login em sua conta cronosXpert</Heading>
           <Text fontSize={'lg'} color={'gray.600'}>
-            Tenha acesso a todas as ferramentas de gestao processual
+            tenha acesso a todas as ferramentas de gestao processual
             
            {error && <p><strong>{error}</strong></p>}
           </Text>
