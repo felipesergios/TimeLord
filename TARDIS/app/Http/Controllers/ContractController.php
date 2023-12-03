@@ -1,13 +1,13 @@
 <?php
-
 namespace App\Http\Controllers;
-
+use App\Mail\WarnMail;
 use App\Models\Contract;
 use App\Models\Associate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 class ContractController extends Controller
 {
     /**
@@ -17,13 +17,23 @@ class ContractController extends Controller
      */
     public function index()
     {
-       // $all = Contract::with('addtive')->get();
-       // $teste = 2004;
-       // return response()->json($all);
-       //return response()->json(["msg"=>"teste",$all]);
+       $trusted=array();
        $user=Auth::user();
        $all_services_per_user = Contract::with('addtive')->with('user')->where('id_user', '=', $user->id)->get();
-       return response()->json($all_services_per_user);
+       foreach($all_services_per_user as $archive){
+
+            $currenttime = new \DateTime($archive->validity);
+            $today = new \DateTime(date('Y-M-d'));
+            $interval = date_diff($today, $currenttime);
+            $compare = $interval->invert;
+    //dd($interval);
+        if($interval->days < 61 and $interval->invert != 1){
+            //Mail::to(Auth::user()->email)->send(WarnMail($archive,$interval));
+            Mail::send(new WarnMail($archive,$interval));//Send mail warn
+            array_push($trusted, $archive);
+        }
+    }
+    return response()->json($trusted);
 
     }
 

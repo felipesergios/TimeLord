@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ContractController;
 use App\Http\Controllers\AdditiveController;
+use App\Http\Controllers\SeiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,7 +35,6 @@ use App\Http\Controllers\AdditiveController;
     Route::post('logout', [AuthController::class,'logout']);
 
     Route::post('register', [RegisterController::class,'register']);
-
 
 
     Route::group(['middleware'=>'jwt.auth'],function(){
