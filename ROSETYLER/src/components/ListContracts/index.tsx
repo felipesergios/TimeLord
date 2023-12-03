@@ -12,8 +12,8 @@ import { Box, Button, Heading, Text ,Table,
 
 
 
-import {MdBook} from 'react-icons/md'
-import { useNavigate } from 'react-router-dom';
+import { FcLineChart } from "react-icons/fc"
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 
 import api from '../../services/api';
 import DataComponent from '../DataTableComponent'
@@ -45,7 +45,7 @@ export default function Success() {
   return (
     
     <Box textAlign="left" mb={5} py={10} px={6}>
-      <MdBook size={50} color={'green.500'} />
+      <FcLineChart size={50} color={'green.500'} />
       <Heading as="h2" size="xl" mt={6} mb={2}>
         Seus contratos
       </Heading>
@@ -59,7 +59,7 @@ export default function Success() {
 
 
 <TableContainer w={'-webkit-max-content'} h={'-webkit-fit-content'}>
-  <Table size={'md'} variant='striped'>
+  <Table borderRadius={'full'} size={'md'} variant='striped'>
     <TableCaption>Preste atencao aos contratos com status em alerta</TableCaption>
     <Thead>
       <Tr>
@@ -87,8 +87,8 @@ export default function Success() {
         if(Difference_In_Days >= 0){
           return (
             <>
-            <Tr>
-          <Td>{contrato.object}</Td>
+            <Tr rounded={'full'}>
+          <Td><Button colorScheme='messenger' variant='outline' ><Link to={`/acompanhamento/${contrato.id}`}>{contrato.object}</Link></Button></Td>
           <Td> {Status ? <Progress hasStripe max={90} isAnimated={true} value={Difference_In_Days} />:<Progress  colorScheme={'red'} hasStripe max={90} isAnimated={true} value={Difference_In_Days} />} </Td>
          
           <Td>{Difference_In_Days}</Td>

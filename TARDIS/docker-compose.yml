@@ -1,0 +1,8 @@
+version: '3'
+services:
+    laravelapp:
+        build: .
+        ports:
+           - "8000:80"
+        volumes:
+            - ./:/usr/app

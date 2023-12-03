@@ -13,6 +13,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+
         $dados =[
             'name'=>env('USER_SEED', 'administrator'),
             'email'=>env('USER_SEED_MAIL', 'administrator@mail.com'),
