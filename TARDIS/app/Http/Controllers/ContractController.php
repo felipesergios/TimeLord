@@ -26,10 +26,15 @@ class ContractController extends Controller
             $today = new \DateTime(date('Y-M-d'));
             $interval = date_diff($today, $currenttime);
             $compare = $interval->invert;
-    //dd($interval);
         if($interval->days < 61 and $interval->invert != 1){
-            //Mail::to(Auth::user()->email)->send(WarnMail($archive,$interval));
-            Mail::send(new WarnMail($archive,$interval));//Send mail warn
+            if( $archive->notificated != "yes"){
+                //Mail::send(new WarnMail($archive,$interval));//Send mail warn
+                Mail::to(Auth::user()->email)->send(new WarnMail($archive,$interval));
+                $Current = Contract::find($archive->id);
+                $Current->notificated = "Yes";
+                $Current->save();
+            }
+            
             array_push($trusted, $archive);
         }
     }

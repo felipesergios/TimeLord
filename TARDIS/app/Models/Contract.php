@@ -19,6 +19,7 @@ class Contract extends Model
         'object',
         'sector',
         'id_contract',
+        'notificated',
     ];
     public function addtive()
     {
